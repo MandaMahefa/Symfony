@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+{% block title "Editer un bien" %}
+{% block body %}
+    <div class="container mt-4">
+        <h3>Editer un bien </h3>
+
+        {{  include('admin/property/_forms.html.twig', {form :form, button: 'Editer'}) }}
+
+    </div>
+{% endblock %}
+

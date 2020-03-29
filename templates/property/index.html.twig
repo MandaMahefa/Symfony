@@ -1,0 +1,52 @@
+
+{% extends 'base.html.twig' %}
+
+{% block title "Listes des biens" %}
+{% block body %}
+    <div class="jumbotron">
+        <div class="container">
+            {{ form_start(form) }}
+                <div class="form-row align-items-end">
+                    <div class="col-md-4">
+                        {{ form_row(form.minSurface) }}
+                    </div>
+                    <div class="col-md-4">
+                        {{ form_row(form.maxPrice) }}
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <button class="btn btn-primary" type="submit">Rechercher</button>
+                        </div>
+                    </div>
+                </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
+    <div class="container " style="margin-top: 20px">
+
+        <div class="row">
+            {% for property in properties %}
+                <div class="col-md-3 text-center">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <a href="#"> {{ property.title }} </a>
+                        </div>
+                        <div class="panel-body">
+                            <p>{{ property.city }} {{ property.getPostalCode}}</p>
+                        </div>
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <div class="text-primary" style="font-weight: bold; font-size: 2rem;">{{ property.getNumberFormatPrice }} Ariary</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="navigation">
+            {{ knp_pagination_render(properties) }}
+        </div>
+    </div>
+
+{% endblock %}

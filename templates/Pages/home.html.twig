@@ -1,0 +1,35 @@
+
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="jumbotron text-center ">
+            <h1>Mon agence immobiler</h1>
+            <p>MandaIMMO c'est une agence moderne qui répondra au mieux à vos attentes. Découvrez nos biens, photos réalisées par un photographe professionnel,
+                descriptif complet. Un service de qualité. Une agence efficace. Types: Maison, Appartement, Terrain, Bureau.</p>
+    </div>
+
+    <div class="container">
+        <h2>Les derniers biens</h2>
+        <div class="row flex">
+            {% for property in properties %}
+                <div class="col-md-3 text-center">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <a href="{{ path('property_show', {slug: property.slug , id: property.id}) }}"> {{ property.title }} </a>
+                        </div>
+                        <div class="panel-body">
+                            <p>{{ property.city }} {{ property.getPostalCode}}</p>
+                        </div>
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <div class="text-primary" style="font-weight: bold; font-size: 2rem;">{{ property.price | number_format(0 , "", " ") }} Ariary</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}

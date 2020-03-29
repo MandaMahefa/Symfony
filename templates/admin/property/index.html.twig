@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+{% block title "Tous les biens" %}
+{% block body %}
+    <div class="jumbotron">
+
+        <div class="container">
+            <h3>Tous les biens</h3>
+
+            <div class="row">
+                {% for message in app.flashes('success') %}
+                    <div class="alert alert-success">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+                <div class="col-md-12">
+
+                    <table class="table table-striped">
+                        <tr>
+                            <td>Title</td>
+                            <td>Designation</td>
+                            <td>Action</td>
+                        </tr>
+                        {% for property in properties %}
+                        <tr>
+                            <td>{{property.title}}</td>
+                            <td>{{ property.description }}</td>
+                            <td>
+                                <a href="{{ path('admin.property.edit', {id: property.id}) }}" class="btn btn-success">Editer</a>
+                                <form method="post" action="{{ path('admin.property.delete', {id: property.id}) }}" style="display: inline-block;" onsubmit=" return confirm('Etes-vous sure vouloir supprimer cette bien?')">
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    <input type="hidden" name="_token" value="{{csrf_token('delete' ~ property.id )}}">
+                                    <button class="btn btn-danger" data-toggle="modal" data-target="#suppression{{ property.id }}">Supprimer</button>
+                                </form>
+{#                                <a href="{{ path('admin.property.delete', {id: property.id}) }}" class="btn btn-danger">Supprimer</a>#}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+
+
+
+                    <div class="row mr-4">
+                        <a href="{{ path('admin.property.new') }}" class="btn btn-primary pull-right">Créer un nouveau</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+
